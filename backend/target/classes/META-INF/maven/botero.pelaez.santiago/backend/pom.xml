@@ -7,5 +7,5 @@
   </parent>
   <artifactId>backend</artifactId>
   <name>BackEnd</name>
-  <description>All the backend of ecommerce application</description>
+  <description>The backend of the project</description>
 </project>
