@@ -24,19 +24,19 @@ public class User {
 	@Column(name = "email")
 	private String email;
 
-	@Column(name = "isAdmin")
-	private boolean isAdmin;
+	@Column(name = "admin")
+	private boolean admin;
 
 	public User() {
 
 	}
 
-	public User(String user, String password, String email, boolean isAdmin) {
+	public User(String user, String password, String email, boolean admin) {
 		super();
 		this.user = user;
 		this.password = password;
 		this.email = email;
-		this.isAdmin = isAdmin;
+		this.admin = admin;
 	}
 
 	public int getId() {
@@ -72,11 +72,11 @@ public class User {
 	}
 
 	public boolean isAdmin() {
-		return isAdmin;
+		return admin;
 	}
 
-	public void setAdmin(boolean isAdmin) {
-		this.isAdmin = isAdmin;
+	public void setAdmin(boolean admin) {
+		this.admin = admin;
 	}
 
 }

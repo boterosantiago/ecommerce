@@ -13,13 +13,13 @@ import botero.pelaez.santiago.repository.UserRepository;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
-@RequestMapping("api/")
+@RequestMapping("/api")
 public class UserController {
 
 	@Autowired
 	private UserRepository userRepository;
 	
-	@GetMapping("users")
+	@GetMapping("/users")
 	public List<User> getUsers()
 	{
 		return this.userRepository.findAll();

@@ -44,7 +44,7 @@ class UserComponent extends React.Component
                                     <td>{user.user}</td>
                                     <td>{user.password}</td>
                                     <td>{user.email}</td>
-                                    <td>{user.isAdmin}</td>
+                                    <td>{user.admin ? "si" : "no"}</td>
                                 </tr>
                             )
                         }
