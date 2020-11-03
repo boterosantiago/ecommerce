@@ -36,14 +36,14 @@ public class UserController {
 		userRepository.save(user);
 		return user;
 	}
-	
+
 	@DeleteMapping("/{id}")
 	public String deteteUser(@PathVariable int id) throws ExistException {
 		userRepository.findById(id)
 				.orElseThrow(() -> new ExistException("The user with id (" + id + ") doesn't exist"));
-		
+
 		userRepository.deleteById(id);
-		
+
 		return "The user with id (" + id + ") was deleted";
 	}
 
@@ -65,6 +65,19 @@ public class UserController {
 			for (User u : users) {
 				if (u.getUser().equalsIgnoreCase(user)) {
 					return u;
+				}
+			}
+		}
+		throw new ExistException("The user with user (" + user + ") doesn't exist");
+	}
+
+	@GetMapping("/getId/{user}")
+	public int getId(@PathVariable String user) throws ExistException {
+		List<User> users = getUsers();
+		if (users != null) {
+			for (User u : users) {
+				if (u.getUser().equalsIgnoreCase(user)) {
+					return u.getId();
 				}
 			}
 		}

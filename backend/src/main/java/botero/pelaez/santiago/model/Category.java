@@ -25,7 +25,7 @@ public class Category {
 	@Column(name = "photo")
 	private String photo;
 
-	@OneToOne(mappedBy = "child")
+	@OneToOne
 	private Category father;
 
 	@OneToOne(mappedBy = "father")

@@ -2,12 +2,13 @@ import React from 'react';
 import './App.css';
 import UserComponent from './components/UserComponent'
 import Login from './components/Login'
+import Home from './components/Home'
 import NotFound from './components/NotFound';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 class App extends React.Component {
 
-  home = () => <UserComponent />
+  home = () => <Home />
 
   login = () => <Login />
   register = () => <UserComponent />

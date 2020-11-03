@@ -3,6 +3,7 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import UserService from '../services/UserService';
+import {SaveCookie} from '../services/Cookie'
 
 class Login extends React.Component {
     constructor(props) {
@@ -20,7 +21,13 @@ class Login extends React.Component {
             .catch(error => console.log(error))
             .finally(() => {
                 if (this.info === true) {
-                    window.location = "/"
+                    UserService.getId(this.state.user)
+                    .then(response => (this.info = response.data))
+                    .catch(error => console.log(error))
+                    .finally(() => {
+                        SaveCookie("id", this.info);
+                        window.location = "/"
+                    });
                 } else {
                     window.location = "/login"
                 }
@@ -53,8 +60,8 @@ class Login extends React.Component {
                 }}>
                     <MuiThemeProvider>
                         <TextField
-                            hintText="Enter your Email"
-                            floatingLabelText="Email"
+                            hintText="Enter your User"
+                            floatingLabelText="User"
                             onChange={(event, newValue) => this.setState({ user: newValue })} />
                         <br />
                         <br />

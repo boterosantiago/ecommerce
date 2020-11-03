@@ -19,6 +19,10 @@ class UserService {
         return axios.get(USER_REST_API_URL + "/findByEmail/" + email);
     }
 
+    getId(user) {
+        return axios.get(USER_REST_API_URL + "/getId/" + user);
+    }
+
     login(user, password) {
         return axios.get(USER_REST_API_URL + "/login/" + user + "/" + password);
     }
