@@ -1,13 +1,35 @@
 import React from 'react';
-import TextField from '@material-ui/core/TextField'
-import Button from '@material-ui/core/Button'
+import TextField from 'material-ui/TextField';
+import RaisedButton from 'material-ui/RaisedButton'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import UserService from '../services/UserService';
 
 class Login extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            user: '',
+            password: ''
+        }
     }
 
     login = () => {
+        this.info = false;
+        UserService.login(this.state.user, this.state.password)
+            .then(response => (this.info = response.data))
+            .catch(error => console.log(error))
+            .finally(() => {
+                if (this.info === true) {
+                    alert("correct");
+                }else
+                {
+                    alert("incorrect");
+                }
+            });
+    }
+
+    register = () => {
+        
     }
 
     render() {
@@ -28,20 +50,35 @@ class Login extends React.Component {
                     alignItems: "center",
                     justifyContent: "center",
                     background: "#ffffff",
-                    paddingTop: "50px",
+                    paddingBottom: "25px",
                 }}>
-                    <TextField id="outlined-basic" label="User" variant="outlined"/>
-                    <br /><br />
-                    <TextField id="filled-password-input" label="Password" type="password" autoComplete="current-password" variant="outlined" />
-                    <div style={{
-                        width: 300,
-                        marginTop: "10px",
-                        float: "right",
-                    }}>
-                        <Button variant="contained" color="primary" onClick={() => this.login()}>
-                            Login
-                        </Button>
-                    </div>
+                    <MuiThemeProvider>
+                        <TextField
+                            hintText="Enter your Email"
+                            floatingLabelText="Email"
+                            onChange={(event, newValue) => this.setState({ user: newValue })} />
+                        <br />
+                        <br />
+                        <TextField
+                            type="password"
+                            hintText="Enter your Password"
+                            floatingLabelText="Password"
+                            onChange={(event, newValue) => this.setState({ password: newValue })} />
+                        <br />
+                        <br />
+                        <a style={{
+                            color: "#0000ff",
+                            fontSize: 15,
+                            textDecoration: "none"
+                        }}
+                        href="/register">Create Account</a>
+                        <br />
+                        <div style={{
+                            float: "right",
+                        }}>
+                            <RaisedButton label="login" primary={true} style={{ margin: 15 }} onClick={() => this.login()} />
+                        </div>
+                    </MuiThemeProvider>
                 </div>
             </div>
         );
