@@ -1,18 +1,15 @@
 import React from 'react';
 import UserService from '../services/UserService';
 
-class UserComponent extends React.Component
-{
-    constructor(props)
-    {
+class UserComponent extends React.Component {
+    constructor(props) {
         super(props)
         this.state = {
-            users:[]
+            users: []
         }
     }
 
-    componentDidMount()
-    {
+    componentDidMount() {
         UserService.getUsers().then((response) => {
             this.setState({
                 users: response.data
@@ -20,12 +17,11 @@ class UserComponent extends React.Component
         });
     }
 
-    render ()
-    {
+    render() {
         return (
             <div>
-                <h1 className = "text-center">Users List: </h1>
-                <table className = "table table-striped">
+                <h1 className="text-center">Users List: </h1>
+                <table className="table table-striped">
                     <thead>
                         <tr>
                             <td>ID</td>
@@ -39,13 +35,13 @@ class UserComponent extends React.Component
                         {
                             this.state.users.map(
                                 user =>
-                                <tr key = {user.id}>
-                                    <td>{user.id}</td>
-                                    <td>{user.user}</td>
-                                    <td>{user.password}</td>
-                                    <td>{user.email}</td>
-                                    <td>{user.admin ? "si" : "no"}</td>
-                                </tr>
+                                    <tr key={user.id}>
+                                        <td>{user.id}</td>
+                                        <td>{user.user}</td>
+                                        <td>{user.password}</td>
+                                        <td>{user.email}</td>
+                                        <td>{user.admin ? "si" : "no"}</td>
+                                    </tr>
                             )
                         }
                     </tbody>
