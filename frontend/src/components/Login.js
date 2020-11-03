@@ -20,16 +20,15 @@ class Login extends React.Component {
             .catch(error => console.log(error))
             .finally(() => {
                 if (this.info === true) {
-                    alert("correct");
-                }else
-                {
-                    alert("incorrect");
+                    window.location = "/"
+                } else {
+                    window.location = "/login"
                 }
             });
     }
 
     register = () => {
-        
+
     }
 
     render() {
@@ -71,7 +70,7 @@ class Login extends React.Component {
                             fontSize: 15,
                             textDecoration: "none"
                         }}
-                        href="/register">Create Account</a>
+                            href="/register">Create Account</a>
                         <br />
                         <div style={{
                             float: "right",
