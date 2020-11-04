@@ -1,6 +1,8 @@
 import React from 'react';
 import UserService from '../services/UserService';
-import { LoadCookie } from '../services/Cookie'
+import RaisedButton from 'material-ui/RaisedButton';
+import { MuiThemeProvider } from 'material-ui/styles';
+import { SaveCookie, LoadCookie } from '../services/Cookie';
 
 class Home extends React.Component {
     constructor(props) {
@@ -11,12 +13,14 @@ class Home extends React.Component {
     }
 
     componentWillMount() {
-        UserService.findById(LoadCookie("id")).then(response => (this.info = response.data))
+        let id = LoadCookie("id");
+        UserService.findById(id).then(response => (this.info = response.data))
             .catch(error => console.log(error))
             .finally(() => {
                 this.setState({
                     user: this.info
                 });
+                SaveCookie("id", id); //Recarga la cookie una hora mas
             })
         do {
 
@@ -24,13 +28,23 @@ class Home extends React.Component {
     }
 
     render() {
-        return (
-            <div>
-                {
-                    this.state.user.email
-                }
-            </div>
-        );
+        if (this.state.user === undefined) {
+            return (
+                <div>
+                    <MuiThemeProvider>
+                        <RaisedButton label="login" primary={true} style={{ margin: 15 }} onClick={() => { window.location = "/login" }} />
+                    </MuiThemeProvider>
+                </div>
+            );
+        } else {
+            return (
+                <div>
+                    {
+                        this.state.user.email
+                    }
+                </div>
+            );
+        }
     }
 }
 

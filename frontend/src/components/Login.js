@@ -3,7 +3,7 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import UserService from '../services/UserService';
-import {SaveCookie} from '../services/Cookie'
+import { SaveCookie } from '../services/Cookie'
 
 class Login extends React.Component {
     constructor(props) {
@@ -20,16 +20,32 @@ class Login extends React.Component {
             .then(response => (this.info = response.data))
             .catch(error => console.log(error))
             .finally(() => {
-                if (this.info === true) {
+                if ("" + this.info === "true") {
                     UserService.getId(this.state.user)
-                    .then(response => (this.info = response.data))
-                    .catch(error => console.log(error))
-                    .finally(() => {
-                        SaveCookie("id", this.info);
-                        window.location = "/"
-                    });
+                        .then(response => (this.info = response.data))
+                        .catch(error => console.log(error))
+                        .finally(() => {
+                            SaveCookie("id", this.info);
+                            window.location = "/";
+                        });
+                } else if ("" + this.info === "false") {
+                    window.location = "/login";
+                }
+                else if ("" + this.info === "error") {
+                    alert("No se pudo enviar la autenticacion de 2 pasos.");
                 } else {
-                    window.location = "/login"
+                    let code = prompt('Enter the code sent to your email: ');
+                    if (code === "" + this.info) {
+                        UserService.getId(this.state.user)
+                            .then(response => (this.info = response.data))
+                            .catch(error => console.log(error))
+                            .finally(() => {
+                                SaveCookie("id", this.info);
+                                window.location = "/";
+                            });
+                    } else {
+                        alert("Wrong code");
+                    }
                 }
             });
     }
@@ -49,7 +65,7 @@ class Login extends React.Component {
                 background: "#95CFED",
             }}>
                 <div style={{
-                    height: 230,
+                    height: 260,
                     width: 400,
                     border: '1px solid black',
                     display: "block",

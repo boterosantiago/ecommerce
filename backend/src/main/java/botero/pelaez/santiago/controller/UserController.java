@@ -2,6 +2,8 @@ package botero.pelaez.santiago.controller;
 
 import java.util.List;
 
+import javax.mail.MessagingException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import botero.pelaez.santiago.exceptions.ExistException;
 import botero.pelaez.santiago.model.User;
+import botero.pelaez.santiago.repository.Email;
 import botero.pelaez.santiago.repository.UserRepository;
 
 @CrossOrigin(origins = "http://localhost:3000")
@@ -98,9 +101,52 @@ public class UserController {
 	}
 
 	@GetMapping("/login/{user}/{password}")
-	public boolean login(@PathVariable String user, @PathVariable String password) throws ExistException {
+	public String login(@PathVariable String user, @PathVariable String password) throws ExistException {
 		User u = getUser(user);
-		return u.getPassword().equals(password);
+		if (u.isAdmin()) {
+			if (u.getPassword().equals(password)) {
+				String code = getRandomCode(8);
+
+				Email email = new Email();
+				try {
+					email.send(u.getEmail(), "Ecommerce authentication", "Code: " + code);
+
+					return code;
+				} catch (MessagingException e) {
+					System.err.println(e.getMessage());
+					return "error";
+				}
+
+			}
+		}
+		return u.getPassword().equals(password) ? "true" : "false";
+	}
+
+	private String getRandomCode(int lenght) {
+		String code = "";
+
+		for (int i = 0; i < lenght; i++) {
+			switch (getRandom(1, 3)) {
+			case 1:
+				code += "" + ((char) getRandom(48, 57));
+				break;
+			case 2:
+				code += "" + ((char) getRandom(65, 90));
+				break;
+			case 3:
+				code += "" + ((char) getRandom(97, 122));
+				break;
+			default:
+				code += "k";
+				break;
+			}
+		}
+
+		return code;
+	}
+
+	private int getRandom(int min, int max) {
+		return (int) (Math.random() * ((max + 1) - min)) + min;
 	}
 
 }
