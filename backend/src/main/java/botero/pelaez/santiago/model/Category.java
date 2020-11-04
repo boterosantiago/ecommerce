@@ -1,5 +1,6 @@
 package botero.pelaez.santiago.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -81,6 +82,15 @@ public class Category {
 
 	public void setProducts(List<Product> products) {
 		this.products = products;
+	}
+
+	public void addProduct(Product product) {
+		if (products == null) {
+			products = new ArrayList<>();
+		}
+		if (child == null) {
+			products.add(product);
+		}
 	}
 
 	public int getId() {
