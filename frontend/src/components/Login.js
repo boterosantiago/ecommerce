@@ -34,20 +34,31 @@ class Login extends React.Component {
                 else if ("" + this.info === "error") {
                     alert("No se pudo enviar la autenticacion de 2 pasos.");
                 } else {
-                    let code = prompt('Enter the code sent to your email: ');
-                    if (code === "" + this.info) {
-                        UserService.getId(this.state.user)
-                            .then(response => (this.info = response.data))
-                            .catch(error => console.log(error))
-                            .finally(() => {
-                                SaveCookie("id", this.info);
-                                window.location = "/";
-                            });
-                    } else {
-                        alert("Wrong code");
-                    }
+                    this.codeAuth(3, "" + this.info);
                 }
             });
+    }
+
+    codeAuth = (oportunities, key) => {
+        do {
+            let code = prompt('Enter the code sent to your email: ');
+            if (code === key) {
+                oportunities = 0;
+                UserService.getId(this.state.user)
+                    .then(response => (this.info = response.data))
+                    .catch(error => console.log(error))
+                    .finally(() => {
+                        SaveCookie("id", this.info);
+                        window.location = "/";
+                    });
+            } else {
+                if (code === null) {
+                    //repite sin mas
+                } else {
+                    oportunities--;
+                }
+            }
+        } while (oportunities > 0); //evita que al cambiar de pagina se cierre
     }
 
     register = () => {

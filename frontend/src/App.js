@@ -10,7 +10,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import UserService from './services/UserService';
 import RaisedButton from 'material-ui/RaisedButton';
 import { SaveCookie, LoadCookie, DeleteCookie } from './services/Cookie';
-import { icUser } from './assets/Icons';
+import { icCart, icUser } from './assets/Icons';
 
 class App extends React.Component {
 
@@ -56,6 +56,7 @@ class App extends React.Component {
         <div>
           <MuiThemeProvider>
             <RaisedButton label="logout" primary={true} style={{ margin: 15 }} onClick={() => { DeleteCookie("id"); window.location = "/login" }} icon={icUser} />
+            <RaisedButton label="Cart" primary={true} style={{ margin: 15 }} onClick={() => { window.location = "/cart" }} icon={icCart} />
           </MuiThemeProvider>
         </div>
       );
@@ -69,7 +70,7 @@ class App extends React.Component {
           <MuiThemeProvider>
             <div>
               <AppBar
-                title="Ecommerce 🛒"
+                title="Ecommerce 💻🛒"
                 position="static"
                 showMenuIconButton={false}
               >
@@ -84,6 +85,8 @@ class App extends React.Component {
             <Route path="/payment" component={this.payment} />
             <Route component={this.notFound} />
           </Switch>
+
+          Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
         </Router>
       </div>
     );
