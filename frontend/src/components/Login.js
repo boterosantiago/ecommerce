@@ -61,10 +61,6 @@ class Login extends React.Component {
         } while (oportunities > 0); //evita que al cambiar de pagina se cierre
     }
 
-    register = () => {
-
-    }
-
     render() {
         return (
             <div style={{

@@ -13,7 +13,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "categoria")
+@Table(name = "category")
 public class Category {
 
 	@Id
@@ -34,6 +34,10 @@ public class Category {
 
 	@OneToMany(mappedBy = "category")
 	List<Product> products;
+
+	public Category() {
+
+	}
 
 	public Category(String name, String photo, Category father, Category child, List<Product> products) {
 		super();

@@ -1,5 +1,6 @@
 package botero.pelaez.santiago.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -12,7 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "producto")
+@Table(name = "product")
 public class Product {
 
 	@Id
@@ -31,18 +32,27 @@ public class Product {
 	@Column(name = "usd")
 	private double usd;
 
+	@Column(name = "stock")
+	private int stock;
+
 	@ManyToOne
 	private Category category;
 
 	@ElementCollection
 	private List<String> photos;
 
-	public Product(String name, String description, double weight, double usd, Category category,
+	public Product()
+	{
+		photos = new ArrayList<>();
+	}
+	
+	public Product(String name, String description, double weight, int stock, double usd, Category category,
 			List<String> photos) {
 		super();
 		this.name = name;
 		this.description = description;
 		this.weight = weight;
+		this.stock = stock;
 		this.usd = usd;
 		this.category = category;
 		this.photos = photos;
@@ -70,6 +80,22 @@ public class Product {
 
 	public void setWeight(double weight) {
 		this.weight = weight;
+	}
+
+	public int getStock() {
+		return stock;
+	}
+
+	public void setStock(int stock) {
+		this.stock = stock;
+	}
+
+	public void addStock(int stock) {
+		this.stock += stock;
+	}
+
+	public void removeStock(int stock) {
+		this.stock -= stock;
 	}
 
 	public double getUsd() {

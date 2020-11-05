@@ -10,7 +10,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import UserService from './services/UserService';
 import RaisedButton from 'material-ui/RaisedButton';
 import { SaveCookie, LoadCookie, DeleteCookie } from './services/Cookie';
-import { icCart, icUser } from './assets/Icons';
+import { icCart, icUser, icHome } from './assets/Icons';
 
 class App extends React.Component {
 
@@ -75,6 +75,7 @@ class App extends React.Component {
                 showMenuIconButton={false}
               >
                 {this._loginButton()}
+                <RaisedButton label="" primary={true} style={{ margin: 15, borderRadius: 90, boxShadow: null }} onClick={() => { window.location = "/" }} icon={icHome} />
               </AppBar>
             </div>
           </MuiThemeProvider>
