@@ -41,6 +41,14 @@ public class BackendApplication implements CommandLineRunner {
 		//this.categoryRepository.save(category);
 		this.productRepository.save(product);
 		this.productRepository.save(new Product("Printer", "HP", 8, 6, 300, null, null));
+		this.productRepository.save(new Product("Printer", "HP", 8, 6, 300, null, null));
+		this.productRepository.save(new Product("Printer", "HP", 8, 6, 300, null, null));
+		this.productRepository.save(new Product("Printer", "HP", 8, 6, 300, null, null));
+		this.productRepository.save(new Product("Printer", "HP", 8, 6, 300, null, null));
+		this.productRepository.save(new Product("Printer", "HP", 8, 6, 300, null, null));
+		this.productRepository.save(new Product("Printer", "HP", 8, 6, 300, null, null));
+		this.productRepository.save(new Product("Printer", "HP", 8, 6, 300, null, null));
+		this.productRepository.save(new Product("Printer", "HP", 8, 6, 300, null, null));
 	}
 
 }

@@ -8,7 +8,8 @@ class Home extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            products: []
+            products: [],
+            width: 0
         }
     }
 
@@ -19,9 +20,13 @@ class Home extends React.Component {
             })
         });
 
-        do {
+        this.updateWidth();
+    }
 
-        } while (this.state.products === undefined); //espera que lea los productos
+    updateWidth = () => {
+        this.setState({
+            width: parseInt((this.refs.container.offsetWidth - 100) / 210, 10)
+        });
     }
 
     addToCart = () => {
@@ -63,9 +68,13 @@ class Home extends React.Component {
     render() {
         return (
             <div style={{
+                height: "100vh",
+                width: "100vh - 20",
+                background: "#ff00ff",
                 padding: 50,
                 display: 'flex'
-            }}>
+            }} ref="container">
+                {this.state.width}
                 {
                     this.state.products.map(
                         product =>
