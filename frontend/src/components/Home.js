@@ -2,6 +2,7 @@ import React from 'react';
 import RaisedButton from 'material-ui/RaisedButton'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import ProductService from '../services/ProductService';
+import logo from '../assets/404.gif'
 
 class Home extends React.Component {
 
@@ -46,7 +47,7 @@ class Home extends React.Component {
 
     getImage = (image) => {
         try {
-            return require('../assets/items/' + image + '.jpg');
+            return logo;
         } catch
         {
             console.log(image + ".jpg no existe")
