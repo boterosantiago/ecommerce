@@ -40,15 +40,25 @@ public class BackendApplication implements CommandLineRunner {
 				
 		//this.categoryRepository.save(category);
 		this.productRepository.save(product);
-		this.productRepository.save(new Product("Printer", "HP", 8, 6, 300, null, null));
-		this.productRepository.save(new Product("Printer", "HP", 8, 6, 300, null, null));
-		this.productRepository.save(new Product("Printer", "HP", 8, 6, 300, null, null));
-		this.productRepository.save(new Product("Printer", "HP", 8, 6, 300, null, null));
-		this.productRepository.save(new Product("Printer", "HP", 8, 6, 300, null, null));
-		this.productRepository.save(new Product("Printer", "HP", 8, 6, 300, null, null));
-		this.productRepository.save(new Product("Printer", "HP", 8, 6, 300, null, null));
-		this.productRepository.save(new Product("Printer", "HP", 8, 6, 300, null, null));
-		this.productRepository.save(new Product("Printer", "HP", 8, 6, 300, null, null));
+		this.productRepository.save(new Product("Printer1", "HP", 8, 6, 300, null, null));
+		this.productRepository.save(new Product("Printer2", "HP", 8, 6, 300, null, null));
+		this.productRepository.save(new Product("Printer3", "HP", 8, 6, 300, null, null));
+		this.productRepository.save(new Product("Printer4", "HP", 8, 6, 300, null, null));
+		this.productRepository.save(new Product("Printer5", "HP", 8, 6, 300, null, null));
+		this.productRepository.save(new Product("Printer6", "HP", 8, 6, 300, null, null));
+		this.productRepository.save(new Product("Printer7", "HP", 8, 6, 300, null, null));
+		this.productRepository.save(new Product("Printer8", "HP", 8, 6, 300, null, null));
+		this.productRepository.save(new Product("Printer9", "HP", 8, 6, 300, null, null));
+		this.productRepository.save(new Product("Printer10", "HP", 8, 6, 300, null, null));
+		this.productRepository.save(new Product("Printer11", "HP", 8, 6, 300, null, null));
+		this.productRepository.save(new Product("Printer12", "HP", 8, 6, 300, null, null));
+		this.productRepository.save(new Product("Printer13", "HP", 8, 6, 300, null, null));
+		this.productRepository.save(new Product("Printer14", "HP", 8, 6, 300, null, null));
+		this.productRepository.save(new Product("Printer15", "HP", 8, 6, 300, null, null));
+		this.productRepository.save(new Product("Printer16", "HP", 8, 6, 300, null, null));
+		this.productRepository.save(new Product("Printer17", "HP", 8, 6, 300, null, null));
+		this.productRepository.save(new Product("Printer18", "HP", 8, 6, 300, null, null));
+		this.productRepository.save(new Product("Printer19", "HP", 8, 6, 300, null, null));
 	}
 
 }

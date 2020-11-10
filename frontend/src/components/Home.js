@@ -20,13 +20,24 @@ class Home extends React.Component {
             })
         });
 
-        this.updateWidth();
+        this.timerID = setInterval(
+            () => this.updateWidth(),
+            1000
+        );
     }
 
-    updateWidth = () => {
-        this.setState({
-            width: parseInt((this.refs.container.offsetWidth - 100) / 210, 10)
-        });
+    componentWillUnmount() {
+        clearInterval(this.timerID);
+    }
+
+    updateWidth() {
+        if (this.state !== undefined) {
+            if (this.state.width !== parseInt((this.refs.container.offsetWidth - 100) / 210, 10)) {
+                this.setState({
+                    width: parseInt((this.refs.container.offsetWidth - 100) / 210, 10)
+                });
+            }
+        }
     }
 
     addToCart = () => {
@@ -65,26 +76,47 @@ class Home extends React.Component {
         );
     }
 
+    listar = () => {
+        if (this.state.width > 0) {
+
+            let count = Math.ceil(this.state.products.length / this.state.width);
+            let newProducts;
+            let component = [];
+            for (let i = 0; i < count; i++) {
+                newProducts = this.state.products.slice(i * this.state.width, (i * this.state.width) + this.state.width);
+                component.push(
+                    <div style={{
+                        width: "100%",
+                        height: 500,
+                        display: 'flex'
+                    }}>
+                        {
+                            newProducts.map(
+                                product => this.item({
+                                    image: product.photo,
+                                    title: product.name,
+                                    price: product.usd,
+                                    stock: product.stock
+                                })
+                            )
+                        }
+                    </div>
+                );
+            }
+            return component;
+        }
+    }
+
     render() {
         return (
             <div style={{
-                height: "100vh",
+                height: "100%",
                 width: "100vh - 20",
-                background: "#ff00ff",
+                background: "#BDF6FF",
                 padding: 50,
-                display: 'flex'
             }} ref="container">
-                {this.state.width}
                 {
-                    this.state.products.map(
-                        product =>
-                            this.item({
-                                image: product.photo,
-                                title: product.name,
-                                price: product.usd,
-                                stock: product.stock
-                            })
-                    )
+                    this.listar()
                 }
             </div>
         );
